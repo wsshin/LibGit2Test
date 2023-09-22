@@ -6,5 +6,5 @@ LibGit2.add!(repo, ".")
 LibGit2.commit(repo, "Commit changes")
 
 rmt = LibGit2.lookup_remote(repo, "origin")
-options = LibGit2.PushOptions(callbacks=LibGit2.credentials_callback)
+options = LibGit2.PushOptions(callbacks=LibGit2.credentials_cb())
 LibGit2.push(rmt, ["refs/heads/main"]; options)
