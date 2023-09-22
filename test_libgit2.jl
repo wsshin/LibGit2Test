@@ -16,6 +16,8 @@ sshcreds.prvkey = joinpath(ENV["HOME"], ".ssh", "id_rsa")
 sshcreds.pubkey = joinpath(ENV["HOME"], ".ssh", "id_rsa.pub")
 
 cred_payload = LibGit2.reset!(LibGit2.CredentialPayload(sshcreds), LibGit2.GitConfig(repo))
+
+callbacks = LibGit2.Callbacks()
 callbacks[:credentials] = (LibGit2.credentials_cb(), cred_payload)
 
 remote_callbacks = LibGit2.RemoteCallbacks(callbacks)
