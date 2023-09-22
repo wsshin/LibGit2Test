@@ -11,7 +11,7 @@ LibGit2.commit(repo, "Commit changes")
 rmt = LibGit2.lookup_remote(repo, "origin")
 
 sshcreds = LibGit2.SSHCredential()
-sshcreds.user = "wsshin"
+# sshcreds.user = "wsshin"
 sshcreds.prvkey = joinpath(ENV["HOME"], ".ssh", "id_rsa")
 sshcreds.pubkey = joinpath(ENV["HOME"], ".ssh", "id_rsa.pub")
 
