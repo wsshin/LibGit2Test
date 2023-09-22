@@ -11,7 +11,7 @@ credentials.pubkey = joinpath(ENV["HOME"], ".ssh", "id_rsa.pub")
 
 rmt = LibGit2.lookup_remote(repo, "origin")
 refspecs = LibGit2.push_refspecs(rmt)
-LibGit2.push(repo; refspecs, credentials)
+LibGit2.push(repo; refspecs=["refs/heads/main"], credentials)
 
 # How I came up with the above working code
 #
