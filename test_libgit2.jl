@@ -6,7 +6,7 @@ LibGit2.add!(repo, ".")
 LibGit2.commit(repo, "Commit changes")
 
 rmt = LibGit2.lookup_remote(repo, "origin")
-options = LibGit2.PushOptions()
+options = LibGit2.PushOptions(callbacks=LibGit2.RemoteCallbacks())
 
 
 # sshcreds = LibGit2.SSHCredential()
