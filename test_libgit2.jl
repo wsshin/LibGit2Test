@@ -6,4 +6,4 @@ LibGit2.add!(repo, ".")
 LibGit2.commit(repo, "Commit changes")
 
 remote = LibGit2.GitRemoteAnon(repo, "git@github.com:wsshin/LibGit2Test.git")
-LibGit2.push(remote, "refs/heads/main")
+LibGit2.push(remote, ["refs/heads/main"])
