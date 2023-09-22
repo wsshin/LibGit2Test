@@ -21,6 +21,6 @@ callbacks = LibGit2.Callbacks()
 callbacks[:credentials] = (LibGit2.credentials_cb(), cred_payload)
 
 remote_callbacks = LibGit2.RemoteCallbacks(callbacks)
-push_opts = PushOptions(callbacks=remote_callbacks)
+push_opts = LibGit2.PushOptions(callbacks=remote_callbacks)
 
 LibGit2.push(rmt, ["refs/heads/main"], force=force, options=push_opts)
