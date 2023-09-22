@@ -6,25 +6,25 @@ LibGit2.add!(repo, ".")
 LibGit2.commit(repo, "Commit changes")
 
 # Try to mimic LibGit2.jl > function push(repo; ...), which tries to automatize a lot.
+
+# sshcreds = LibGit2.SSHCredential()
+# sshcreds.prvkey = joinpath(ENV["HOME"], ".ssh", "id_rsa")
+# sshcreds.pubkey = joinpath(ENV["HOME"], ".ssh", "id_rsa.pub")
+
+# LibGit2.push(repo, credentials=sshcreds)
+
+rmt = LibGit2.lookup_remote(repo, "origin")
+
 sshcreds = LibGit2.SSHCredential()
 sshcreds.prvkey = joinpath(ENV["HOME"], ".ssh", "id_rsa")
 sshcreds.pubkey = joinpath(ENV["HOME"], ".ssh", "id_rsa.pub")
 
-LibGit2.push(repo, credentials=sshcreds)
+cred_payload = LibGit2.reset!(LibGit2.CredentialPayload(sshcreds), LibGit2.GitConfig(repo))
 
-# rmt = LibGit2.lookup_remote(repo, "origin")
+callbacks = LibGit2.Callbacks()
+callbacks[:credentials] = (LibGit2.credentials_cb(), cred_payload)
 
-# sshcreds = LibGit2.SSHCredential()
-# # sshcreds.user = "wsshin"
-# sshcreds.prvkey = joinpath(ENV["HOME"], ".ssh", "id_rsa")
-# sshcreds.pubkey = joinpath(ENV["HOME"], ".ssh", "id_rsa.pub")
+remote_callbacks = LibGit2.RemoteCallbacks(callbacks)
+push_opts = LibGit2.PushOptions(callbacks=remote_callbacks)
 
-# cred_payload = LibGit2.reset!(LibGit2.CredentialPayload(sshcreds), LibGit2.GitConfig(repo))
-
-# callbacks = LibGit2.Callbacks()
-# callbacks[:credentials] = (LibGit2.credentials_cb(), cred_payload)
-
-# remote_callbacks = LibGit2.RemoteCallbacks(callbacks)
-# push_opts = LibGit2.PushOptions(callbacks=remote_callbacks)
-
-# LibGit2.push(rmt, ["refs/heads/main"], options=push_opts)
+LibGit2.push(rmt, ["refs/heads/main"], options=push_opts)
