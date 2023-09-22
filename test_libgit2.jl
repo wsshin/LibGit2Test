@@ -5,5 +5,5 @@ repo = LibGit2.GitRepo(repo_path)
 LibGit2.add!(repo, ".")
 LibGit2.commit(repo, "Commit changes")
 
-remote = LibGit2.GitRemoteAnon(repo, "git@github.com:wsshin/LibGit2Test.git")
-LibGit2.push(remote, ["refs/heads/main"])
+rmt = LibGit2.lookup_remote(repo, "origin")
+LibGit2.push(rmt, ["refs/heads/main"])
